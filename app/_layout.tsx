@@ -1,8 +1,14 @@
 ﻿import { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
+import {
+    useFonts,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+} from '@expo-google-fonts/inter';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 import { useAuth } from '@/hooks/useAuth';
@@ -34,17 +40,32 @@ export default function RootLayout() {
 
     return (
         <NotificationManager>
-            <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="(auth)" />
-                <Stack.Screen name="(tabs)" />
-                <Stack.Screen name="+not-found" />
-            </Stack>
-            <StatusBar style="dark" />
-
-            {/* ⚡ Built on Bolt Footer */}
-            <View style={{ alignItems: 'center', marginBottom: 12 }}>
-                <Text style={{ fontSize: 12, color: '#94a3b8' }}>Built on Bolt ⚡</Text>
+            <View style={styles.container}>
+                <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="(auth)" />
+                    <Stack.Screen name="(tabs)" />
+                    <Stack.Screen name="+not-found" />
+                </Stack>
+                <View style={styles.footer}>
+                    <Text style={styles.footerText}>Built on Bolt ⚡</Text>
+                </View>
+                <StatusBar style="dark" />
             </View>
         </NotificationManager>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    footer: {
+        alignItems: 'center',
+        paddingVertical: 8,
+        backgroundColor: '#f8fafc',
+    },
+    footerText: {
+        fontSize: 12,
+        color: '#94a3b8',
+    },
+});
