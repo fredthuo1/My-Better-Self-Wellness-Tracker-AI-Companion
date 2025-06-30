@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
+import { View, Text } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
@@ -10,35 +11,40 @@ import NotificationManager from '@/components/NotificationManager';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  useFrameworkReady();
-  
-  const { loading } = useAuth();
+    useFrameworkReady();
 
-  const [fontsLoaded, fontError] = useFonts({
-    'Inter-Regular': Inter_400Regular,
-    'Inter-Medium': Inter_500Medium,
-    'Inter-SemiBold': Inter_600SemiBold,
-    'Inter-Bold': Inter_700Bold,
-  });
+    const { loading } = useAuth();
 
-  useEffect(() => {
-    if ((fontsLoaded || fontError) && !loading) {
-      SplashScreen.hideAsync();
+    const [fontsLoaded, fontError] = useFonts({
+        'Inter-Regular': Inter_400Regular,
+        'Inter-Medium': Inter_500Medium,
+        'Inter-SemiBold': Inter_600SemiBold,
+        'Inter-Bold': Inter_700Bold,
+    });
+
+    useEffect(() => {
+        if ((fontsLoaded || fontError) && !loading) {
+            SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded, fontError, loading]);
+
+    if ((!fontsLoaded && !fontError) || loading) {
+        return null;
     }
-  }, [fontsLoaded, fontError, loading]);
 
-  if ((!fontsLoaded && !fontError) || loading) {
-    return null;
-  }
+    return (
+        <NotificationManager>
+            <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(auth)" />
+                <Stack.Screen name="(tabs)" />
+                <Stack.Screen name="+not-found" />
+            </Stack>
+            <StatusBar style="dark" />
 
-  return (
-    <NotificationManager>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(auth)" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="dark" />
-    </NotificationManager>
-  );
+            {/* ⚡ Built on Bolt Footer */}
+            <View style={{ alignItems: 'center', marginBottom: 12 }}>
+                <Text style={{ fontSize: 12, color: '#94a3b8' }}>Built on Bolt ⚡</Text>
+            </View>
+        </NotificationManager>
+    );
 }
