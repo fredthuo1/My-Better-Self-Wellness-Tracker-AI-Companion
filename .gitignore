@@ -1,6 +1,8 @@
 # dependencies
 node_modules/
 .vs
+.vs/
+*.sqlite-journal
 
 # expo
 .expo/
@@ -34,3 +36,5 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+.vercel

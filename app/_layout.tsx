@@ -46,9 +46,6 @@ export default function RootLayout() {
                     <Stack.Screen name="(tabs)" />
                     <Stack.Screen name="+not-found" />
                 </Stack>
-                <View style={styles.footer}>
-                    <Text style={styles.footerText}>Built on Bolt ⚡</Text>
-                </View>
                 <StatusBar style="dark" />
             </View>
         </NotificationManager>
