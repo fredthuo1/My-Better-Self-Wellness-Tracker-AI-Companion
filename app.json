@@ -10,7 +10,10 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.mybetterself.wellness"
+      "bundleIdentifier": "com.mybetterself.wellness",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -19,9 +22,9 @@
       }
     },
     "web": {
-      "bundler": "metro",
-      "output": "single",
-      "favicon": "./assets/images/favicon.png"
+        "bundler": "webpack",
+        "output": "single",
+        "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",
